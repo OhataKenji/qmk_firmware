@@ -7,5 +7,6 @@ OLED_DRIVER = SSD1306
 ENCODER_ENABLE = yes
 DIP_SWITCH_ENABLE = no
 LTO_ENABLE = yes
+MIDI_ENABLE = yes
 
 SRC += oled_display.c
