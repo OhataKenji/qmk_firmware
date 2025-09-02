@@ -21,6 +21,7 @@
 // Defines names for use in layer keycodes and the keymap
 enum layer_names {
   _QWERTY = 0,
+  _HHKB,
   _LOWER,
   _RAISE,
   _ADJUST
@@ -50,6 +51,9 @@ void render_status(void) {
   switch (get_highest_layer(layer_state)) {
       case _QWERTY:
           oled_write_P(PSTR("Default\n"), false);
+          break;
+      case _HHKB:
+          oled_write_P(PSTR("HHKB\n"), false);
           break;
       case _RAISE:
           oled_write_P(PSTR("Raise\n"), false);
