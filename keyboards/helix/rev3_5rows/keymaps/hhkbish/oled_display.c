@@ -29,11 +29,11 @@ enum layer_names {
 
 #ifdef OLED_ENABLE
 
-static void render_status(void) {
+void render_status(void) {
 
   // Render to mode icon
   static const char os_logo[][2][3] PROGMEM  ={{{0x95,0x96,0},{0xb5,0xb6,0}},{{0x97,0x98,0},{0xb7,0xb8,0}}};
-  if (!keymap_config.swap_lalt_lgui) {
+  if (is_mac_mode()) {
     oled_write_P(os_logo[0][0], false);
     oled_write_P(PSTR("\n"), false);
     oled_write_P(os_logo[0][1], false);
@@ -90,22 +90,22 @@ static void render_logo(void) {
 }
 
 static void render_rgbled_status(bool full) {
-#ifdef RGB_MATRIX_ENABLE
-    if (rgb_matrix_is_enabled()) {
+#ifdef RGBLIGHT_ENABLE
+    if (RGBLIGHT_MODES > 1 && rgblight_is_enabled()) {
         if (full) {
             // " LED %d:%d,%d,%d"
             oled_write_P(PSTR(" LED"), false);
-            oled_write(get_u8_str(rgb_matrix_get_mode(), ' '), false);
+            oled_write(get_u8_str(rgblight_get_mode(), ' '), false);
             oled_write_char(':', false);
-            oled_write(get_u8_str(rgb_matrix_get_hue() / RGB_MATRIX_HUE_STEP, ' '), false);
+            oled_write(get_u8_str(rgblight_get_hue() / RGBLIGHT_HUE_STEP, ' '), false);
             oled_write_char(',', false);
-            oled_write(get_u8_str(rgb_matrix_get_sat() / RGB_MATRIX_SAT_STEP, ' '), false);
+            oled_write(get_u8_str(rgblight_get_sat() / RGBLIGHT_SAT_STEP, ' '), false);
             oled_write_char(',', false);
-            oled_write(get_u8_str(rgb_matrix_get_val() / RGB_MATRIX_VAL_STEP, ' '), false);
+            oled_write(get_u8_str(rgblight_get_val() / RGBLIGHT_VAL_STEP, ' '), false);
         } else {
             // "[%2d]"
             oled_write_char('[', false);
-            oled_write(get_u8_str(rgb_matrix_get_mode(), ' '), false);
+            oled_write(get_u8_str(rgblight_get_mode(), ' '), false);
             oled_write_char(']', false);
         }
     }
