@@ -1,4 +1,9 @@
-# The default keymap for Helix rev3 5rows
+# The hhkbish keymap for Helix rev3 5rows
+
+```sh
+qmk compile -kb helix/rev3 -km hhkbish
+qmk flash -kb helix/rev3 -km hhkbish
+```
 
 ### Qwerty Layer (Base)
 ```
